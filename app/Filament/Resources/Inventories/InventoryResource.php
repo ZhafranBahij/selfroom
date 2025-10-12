@@ -31,6 +31,15 @@ class InventoryResource extends Resource
             ->components([
                 Select::make('item_id')
                     ->relationship('item', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('description')
+                            ->maxLength(255),
+                    ])
                     ->required(),
                 TextInput::make('location')
                     ->required(),
