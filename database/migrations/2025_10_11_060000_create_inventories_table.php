@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->string('location');
+            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
             $table->string('detail_location')->nullable();
+            $table->string('condition')->default('bagus');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

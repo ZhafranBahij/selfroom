@@ -17,8 +17,14 @@ class Inventory extends Model
      */
     protected $fillable = [
         'item_id',
-        'location',
+        'location_id',
         'detail_location',
+        'condition',
+        'note',
+    ];
+
+    protected $casts = [
+        'condition' => 'string',
     ];
 
     /**
@@ -27,5 +33,13 @@ class Inventory extends Model
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * Get the location that owns the inventory.
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 }

@@ -41,9 +41,30 @@ class InventoryResource extends Resource
                             ->maxLength(255),
                     ])
                     ->required(),
-                TextInput::make('location')
+                Select::make('location_id')
+                    ->relationship('location', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('description')
+                            ->maxLength(255),
+                    ])
                     ->required(),
                 TextInput::make('detail_location'),
+                Select::make('condition')
+                    ->options([
+                        'bagus' => 'Bagus',
+                        'rusak_minor' => 'Rusak Minor',
+                        'rusak_major' => 'Rusak Major',
+                    ])
+                    ->default('bagus')
+                    ->required(),
+                TextInput::make('note')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -53,8 +74,24 @@ class InventoryResource extends Resource
             ->components([
                 TextEntry::make('item.name')
                     ->label('Item'),
-                TextEntry::make('location'),
+                TextEntry::make('location.name')
+                    ->label('Location'),
                 TextEntry::make('detail_location')
+                    ->placeholder('-'),
+                TextEntry::make('condition')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'bagus' => 'Bagus',
+                        'rusak_minor' => 'Rusak Minor',
+                        'rusak_major' => 'Rusak Major',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'bagus' => 'success',
+                        'rusak_minor' => 'warning',
+                        'rusak_major' => 'danger',
+                    }),
+                TextEntry::make('note')
+                    ->columnSpanFull()
                     ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()
@@ -76,12 +113,28 @@ class InventoryResource extends Resource
                 TextColumn::make('item.name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('location')
+                TextColumn::make('location.name')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('detail_location')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('condition')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'bagus' => 'Bagus',
+                        'rusak_minor' => 'Rusak Minor',
+                        'rusak_major' => 'Rusak Major',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'bagus' => 'success',
+                        'rusak_minor' => 'warning',
+                        'rusak_major' => 'danger',
+                    })
+                    ->sortable(),
+                TextColumn::make('note')
+                    ->limit(30)
+                    ->tooltip(fn (string $state): string => $state),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

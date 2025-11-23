@@ -16,8 +16,8 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         // Create 10 items, each with 1-3 inventory records
-        \App\Models\Item::factory(10)
-            ->has(\App\Models\Inventory::factory()->count(rand(1, 3)))
-            ->create();
+        // \App\Models\Item::factory(10)
+        //     ->has(\App\Models\Inventory::factory()->count(rand(1, 3)))
+        //     ->create();
     }
 }
