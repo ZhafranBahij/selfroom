@@ -36,7 +36,10 @@ class JournalResource extends Resource
                 TextInput::make('title'),
                 Textarea::make('description')
                     ->columnSpanFull(),
-                DatePicker::make('date'),
+                DatePicker::make('date')
+                    ->default(now())
+                    ->displayFormat('Y-m-d H:i:s')
+                    ->seconds(false),
             ]);
     }
 

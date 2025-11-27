@@ -60,7 +60,10 @@ class TransactionResource extends Resource
                 TextInput::make('amount')
                     ->required()
                     ->numeric(),
-                DatePicker::make('date'),
+                DatePicker::make('date')
+                    ->default(now())
+                    ->displayFormat('Y-m-d H:i:s')
+                    ->seconds(false),
                 TextInput::make('description'),
             ]);
     }
