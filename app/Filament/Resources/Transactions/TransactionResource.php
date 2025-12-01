@@ -97,6 +97,7 @@ class TransactionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(static::getModel()::query()->latest())
             ->columns([
                 TextColumn::make('from_account.name')
                     ->label('from account')

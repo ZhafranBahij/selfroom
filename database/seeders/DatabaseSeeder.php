@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             JournalSeeder::class,
             TransactionSeeder::class,
+
+            // Task management
+            // TaskSeeder::class,
         ]);
     }
 }

@@ -20,6 +20,7 @@ use App\Filament\Resources\Transactions\TransactionResource;
 use App\Filament\Resources\Items\ItemResource;
 use App\Filament\Resources\Inventories\InventoryResource;
 use App\Filament\Resources\Journals\JournalResource;
+use App\Filament\Resources\Tasks\TaskResource;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -58,6 +59,7 @@ class AdminPanelProvider extends PanelProvider
                 ItemResource::class,
                 InventoryResource::class,
                 JournalResource::class,
+                TaskResource::class,
             ])
             ->pages([
                 Dashboard::class,
