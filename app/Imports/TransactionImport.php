@@ -18,8 +18,8 @@ class TransactionImport implements ToModel, WithHeadingRow, WithValidation
         $toAccount = $this->findOrCreateAccount($row['to_account'] ?? $row['to account'] ?? null);
 
         return new Transaction([
-            'from_account_id' => $fromAccount->id,
-            'to_account_id' => $toAccount->id,
+            'from_id' => $fromAccount->id,
+            'to_id' => $toAccount->id,
             'amount' => $row['amount'] ?? 0,
             'date' => $row['date'] ?? now(),
             'description' => $row['description'] ?? null,
