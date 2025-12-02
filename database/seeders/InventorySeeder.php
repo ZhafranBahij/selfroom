@@ -12,6 +12,6 @@ class InventorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+
     }
 }
