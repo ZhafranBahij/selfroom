@@ -65,6 +65,10 @@ class InventoryResource extends Resource
                     ])
                     ->default('bagus')
                     ->required(),
+                TextInput::make('quantity')
+                    ->numeric()
+                    ->default(1)
+                    ->required(),
                 TextInput::make('note')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -120,7 +124,9 @@ class InventoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('detail_location')
-                    ->searchable()
+                    ->searchable(),
+                TextColumn::make('quantity')
+                    ->numeric()
                     ->sortable(),
                 TextColumn::make('condition')
                     ->badge()

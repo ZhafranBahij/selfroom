@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('detail_location')->nullable();
             $table->string('condition')->default('bagus');
             $table->text('note')->nullable();
+            $table->integer('quantity')->default(1)->after('condition');
             $table->timestamps();
             $table->softDeletes();
         });

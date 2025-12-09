@@ -16,6 +16,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -43,7 +44,7 @@ class TaskResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->columnSpanFull(),
                 DatePicker::make('date')
                     ->default(now())
